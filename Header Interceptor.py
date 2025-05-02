@@ -15,10 +15,10 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
         self._callbacks.setExtensionName("Header Interceptor")
         callbacks.registerHttpListener(self)
 
-        # 建立 GUI
+        # GUI
         self._build_gui()
 
-        # 註冊面板到 Burp
+        # Burp
         callbacks.addSuiteTab(self)
 
     def getTabCaption(self):
@@ -31,7 +31,7 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
         self._main_panel = swing.JPanel(BorderLayout())
         self._main_panel.setBackground(Color(245, 245, 245))
 
-        # 系統訊息
+        # System Message
         self.message_area = swing.JTextArea(10, 80)
         self.message_area.setEditable(False)
         self.message_area.setLineWrap(True)
@@ -39,7 +39,7 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
         self.message_area.setBackground(Color(235, 235, 235))
         message_scroll = swing.JScrollPane(self.message_area)
 
-        # 攔截 Header 顯示
+        # Header
         self.header_area = swing.JTextArea(10, 80)
         self.header_area.setEditable(False)
         self.header_area.setLineWrap(True)
@@ -47,13 +47,13 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
         self.message_area.setBackground(Color(235, 235, 235))
         header_scroll = swing.JScrollPane(self.header_area)
 
-        # 過濾欄位
+        # Filter
         filter_panel = swing.JPanel()
         filter_panel.add(swing.JLabel("Filter Header:"))
         self.header_filter_field = swing.JTextField(20)
         filter_panel.add(self.header_filter_field)
 
-        # 控制按鈕
+        # Button
         button_panel = swing.JPanel()
         start_button = swing.JButton("Start")
         clear_button = swing.JButton("Clear")
@@ -62,20 +62,18 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
         button_panel.add(start_button)
         button_panel.add(clear_button)
 
-        # 中間面板（過濾輸入 + 攔截輸出）
         center_panel = swing.JPanel(BorderLayout())
         center_panel.add(filter_panel, BorderLayout.NORTH)
         center_panel.add(header_scroll, BorderLayout.CENTER)
         center_panel.add(button_panel, BorderLayout.SOUTH)
 
-        # 整合成主面板
         self._main_panel.add(message_scroll, BorderLayout.NORTH)
         self._main_panel.add(center_panel, BorderLayout.CENTER)
 
     def run_selenium(self):
         try:
             process = Runtime.getRuntime().exec(
-                "/Users/toyhsieh/.pyenv/versions/3.11.11/bin/python /Users/toyhsieh/Documents/burp_extensions/selenium_script.py"
+                "/path/to/python3 /path/to/selenium_script.py"
             )
             std_input = BufferedReader(InputStreamReader(process.getInputStream()))
             std_error = BufferedReader(InputStreamReader(process.getErrorStream()))
