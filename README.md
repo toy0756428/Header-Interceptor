@@ -1,5 +1,3 @@
-# Header-Interceptor
-
 # Burp Extension - Header Interceptor with Selenium
 
 This extension uses **Selenium for simulating page input** and **HTTP Header filtering functionality** to intercept and view specific request headers.
